@@ -38,7 +38,7 @@ public class JpaMain {
 
             //수정
             Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
+            findMember.setName("HelloJPA1");
 
             //em.persist(findMember); -- 해당 코드가 필요없음 마치 자바 컬렉션 쓰듯이 수정이 바로 이루어짐
 
