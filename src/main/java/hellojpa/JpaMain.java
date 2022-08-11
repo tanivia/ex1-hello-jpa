@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -32,13 +33,26 @@ public class JpaMain {
             System.out.println("findMember.id = " + findMember.getId());
             System.out.println("findMember.name = " + findMember.getName());*/
 
+            //JPQL
+            //JPA는 SQL을 추상화한 JPQL 이라는 객체 지향 쿼리 언어 제공(객체를 대상으로 하는 객체 지향 쿼리)
+            //JPQL은 엔티티 객체를 대상으로 쿼리
+            //SQL은 데이터베이스 테이블을 대상으로 쿼리
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+                    //paging(1~10)
+                    /*.setFirstResult(0)
+                    .setMaxResults(10)*/
+                    .getResultList();
+            for(Member member : result) {
+                System.out.println("member.name = " + member.getName());
+            }
+
             //삭제
             /*Member findMember = em.find(Member.class, 1L);
             em.remove(findMember);*/
 
             //수정
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA1");
+            /*Member findMember = em.find(Member.class, 1L);
+            findMember.setName("HelloJPA1");*/
 
             //em.persist(findMember); -- 해당 코드가 필요없음 마치 자바 컬렉션 쓰듯이 수정이 바로 이루어짐
 
